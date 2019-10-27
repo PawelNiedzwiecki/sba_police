@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Komponent(props) {
+const Komponent = (props) => {
     const [id, setID] = useState(props.key);
     const [idKomponentu, setIdKomponentu] = useState(props.id);
     const [nazwaKomponentu, setNazwa] = useState(props.nazwa);

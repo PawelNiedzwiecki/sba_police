@@ -4,7 +4,7 @@ import {
   Link,
 } from 'react-router-dom';
 
-function OstatnieWdrozenia() {
+const OstatnieWdrozenia = () => {
     const [data, setData] = useState([]);
     
     useEffect(() => {
@@ -32,4 +32,5 @@ function OstatnieWdrozenia() {
     );
   }
 
-  export default OstatnieWdrozenia
+  export default OstatnieWdrozenia;
+  

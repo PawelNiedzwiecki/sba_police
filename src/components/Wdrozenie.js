@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Komponent from './Komponent'
 
-function Wdrozenie(props) {
+const Wdrozenie = (props) => {
     const [data, setData] = useState({});
     const [components, setComponents] = useState([]);
     const [liczbaKomponentow, setLiczbaKomponentow] = useState();
