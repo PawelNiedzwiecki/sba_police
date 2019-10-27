@@ -11,6 +11,7 @@ import Wdrozenie from './components/Wdrozenie';
 import Home from './components/Home';
 import Header from './components/Header';
 import Add from './components/Add';
+import Temp from './components/Temp';
 
 
 const App = () => (
@@ -29,6 +30,9 @@ const App = () => (
             <Add />
           </Route>
           <Route path="/wdrozenie/:wdrozenieID" component={Wdrozenie} />
+          <Route path="/temp" exact>
+            <Temp name="Pawel" age="29" />
+          </Route>
         </Switch>
       </div>
     </Router>

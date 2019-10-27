@@ -14,7 +14,7 @@ const MessageBox = (props) => {
   
     if(message){
       return(
-        <div class={messageClass} role="alert">
+        <div className={messageClass} role="alert">
           {message}
         </div>
       )
