@@ -57,6 +57,7 @@ const Add = () => {
             }else{
               setMessageType("success");
               setMessage("Dodano wdrożenie");
+              resetFields();
             }
             response.json();
           })
@@ -78,7 +79,7 @@ const Add = () => {
       setSbaLink('');
       setRespCode('');
       setIsCreating('');
-      setMessage('');
+      // setMessage('');
     }
 
 
