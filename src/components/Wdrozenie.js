@@ -37,7 +37,7 @@ const Wdrozenie = (props) => {
           <div>Data dodania:{' '}{data.dataDodania}</div>
           <div>Nazwa wdrożenia:{' '}{data.nazwa}</div>
           <div>Ilość komponentów:{' '}{liczbaKomponentow}</div>
-          <button onClick={() => addNewComponent()}>Add</button>
+          <button onClick={() => addNewComponent()}>Add component</button>
           <table className="table table-hover">
             <thead>
               <tr>
@@ -56,27 +56,11 @@ const Wdrozenie = (props) => {
   }
   return (
     <div>
-        <div>
-  Id wdrożenia:
-          {' '}
-          {data.id}
-        </div>
-        <div>
-  Data dodania:
-          {' '}
-          {data.dataDodania}
-        </div>
-        <div>
-  Nazwa wdrożenia:
-          {' '}
-          {data.nazwa}
-        </div>
-        <div>
-  Ilość komponentów:
-          {' '}
-          {liczbaKomponentow}
-        </div>
-      </div>
+      <div>Id wdrożenia:{' '}{data.id}</div>
+      <div>Data dodania:{' '}{data.dataDodania}</div>
+      <div>Nazwa wdrożenia:{' '}{data.nazwa}</div>
+      <div>Ilość komponentów:{' '}{liczbaKomponentow}</div>
+    </div>
   );
 };
 

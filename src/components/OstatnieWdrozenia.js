@@ -23,7 +23,6 @@ const OstatnieWdrozenia = () => {
               }}
               >
                 {item.nazwa}
-
               </Link>
             </li>
           ))

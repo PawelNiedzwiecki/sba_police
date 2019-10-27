@@ -10,28 +10,30 @@ import ListaWdrozen from './components/ListaWdrozen';
 import Wdrozenie from './components/Wdrozenie';
 import Home from './components/Home';
 import Header from './components/Header';
+import Add from './components/Add';
 
 
-function App() {
-  return (
-    <div className="App">
-      <Router>
-        <Header />
-        <div className="container-fluid">
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/list">
-              <ListaWdrozen />
-            </Route>
-            <Route path="/wdrozenie/:wdrozenieID" component={Wdrozenie} />
-          </Switch>
-        </div>
-      </Router>
-    </div>
-  );
-}
+const App = () => (
+  <div className="App">
+    <Router>
+      <Header />
+      <div className="container-fluid">
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/list">
+            <ListaWdrozen />
+          </Route>
+          <Route exact path="/add">
+            <Add />
+          </Route>
+          <Route path="/wdrozenie/:wdrozenieID" component={Wdrozenie} />
+        </Switch>
+      </div>
+    </Router>
+  </div>
+);
 
 
 export default App;
