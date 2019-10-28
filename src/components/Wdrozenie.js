@@ -52,6 +52,32 @@ const Wdrozenie = (props) => {
         });
   }
 
+  function deleteComponent(id){
+    // console.log(id);
+    fetch(`http://justsimply.pl/sba/api/wdrozenie/delete_component.php?id=${id}`)
+      .then((response) =>{
+        console.log(response.status);
+        if(response.status == 401){
+          // setMessage("Nie udało się usunąć komponentu");
+          // setMessageType("danger");
+        }else{
+          fetch(`http://justsimply.pl/sba/api/wdrozenie/item.php?id=${idWdrozenia}`)
+          .then((res) => res.json())
+          .then((result) => {
+            setData(result);
+            setComponents(result.komponenty);
+            setLiczbaKomponentow(result.komponenty.length);
+            setNewComponentName('');
+            setNewComponentDGID('');
+            setNewComponentTime('');
+            setNewComponentTransformation('');
+          }).then(() => {
+            console.log({ data });
+          });
+        }
+      })
+  }
+
     return (
       <div>
           <div>Id wdrożenia:{' '}{data.id}</div>
@@ -70,7 +96,7 @@ const Wdrozenie = (props) => {
             </thead>
             <tbody>
               {liczbaKomponentow > 0 ? (
-                components.map((item) => <Komponent key={item.id} data_id={item.id} id={item.dgID} nazwa={item.nazwaKomponentu} poczatkowyCzas={item.poczatkowyCzas} transformacja={item.transformacja} />)
+                components.map((item) => <Komponent key={item.id} data_id={item.id} id={item.dgID} nazwa={item.nazwaKomponentu} poczatkowyCzas={item.poczatkowyCzas} transformacja={item.transformacja} deleteFunction={deleteComponent} />)
               ) : (
                 <tr><td colspan="4">Brak komponentów</td></tr>
               )
