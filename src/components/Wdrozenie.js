@@ -12,7 +12,6 @@ const Wdrozenie = (props) => {
   const [newComponentTransformation, setNewComponentTransformation] = useState();
 
   useEffect(() => {
-    console.log(`Data:${data.length}`);
     const { wdrozenieID } = props.match.params;
     setID(wdrozenieID);
     fetch(`http://justsimply.pl/sba/api/wdrozenie/item.php?id=${wdrozenieID}`)
@@ -21,9 +20,7 @@ const Wdrozenie = (props) => {
         setData(result);
         setComponents(result.komponenty);
         setLiczbaKomponentow(result.komponenty.length);
-      }).then(() => {
-        console.log({ data });
-      });
+      })
   }, []);
 
   function addNewComponent() {
@@ -56,7 +53,6 @@ const Wdrozenie = (props) => {
     // console.log(id);
     fetch(`http://justsimply.pl/sba/api/wdrozenie/delete_component.php?id=${id}`)
       .then((response) =>{
-        console.log(response.status);
         if(response.status == 401){
           // setMessage("Nie udało się usunąć komponentu");
           // setMessageType("danger");

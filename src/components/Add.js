@@ -13,12 +13,13 @@ const Add = () => {
   const 
     [date, setDate] = useState(),
     [projectName, setProjectName] = useState(),
-    [projectLink, setProjectLink] = useState(),
-    [sbaLink, setSbaLink] = useState(),
+    [projectLink, setProjectLink] = useState(""),
+    [sbaLink, setSbaLink] = useState(""),
     [isCreating, setIsCreating] = useState(),
     [respCode, setRespCode] = useState(),
     [messageType, setMessageType] = useState(),
-    [message, setMessage] = useState();
+    [message, setMessage] = useState(),
+    [projectType, setProjectType] = useState('review');
 
     function createProject(){
       
@@ -31,7 +32,12 @@ const Add = () => {
 
         const newDate = `${day}.${month}.${year}`;
 
-        fetch(`http://justsimply.pl/sba/api/wdrozenie/create.php?nazwa=${projectName}&linkProjektu=${projectLink}&linkSBA=${sbaLink}&dataZakonczenia='${newDate}'`)
+        let url = `http://justsimply.pl/sba/api/wdrozenie/create.php?nazwa=${projectName}&projectType=${projectType}`;
+        if (projectLink) url+= `&linkProjektu=${projectLink}`;
+        if (sbaLink) url+= `&linkSBA=${sbaLink}`;
+        if (newDate) url+= `&dataZakonczenia=${newDate}`;
+      
+        fetch(url)
         .then((response) => {
           setRespCode(response.status);
           if(response.status == 400) {
@@ -48,7 +54,11 @@ const Add = () => {
           })
 
       }else{
-        fetch(`http://justsimply.pl/sba/api/wdrozenie/create.php?nazwa=${projectName}&linkProjektu=${projectLink}&linkSBA=${sbaLink}`)
+        let url = `http://justsimply.pl/sba/api/wdrozenie/create.php?nazwa=${projectName}&projectType=${projectType}`;
+        if (projectLink) url+= `&linkProjektu=${projectLink}`;
+        if (sbaLink) url+= `&linkSBA=${sbaLink}`;
+        console.log(projectLink.length)
+        fetch(url)
           .then((response) => {
             setRespCode(response.status);
             if(response.status == 400) {
@@ -82,12 +92,24 @@ const Add = () => {
       // setMessage('');
     }
 
+    function changeProjectType(e) {
+      setProjectType(e);
+    }
+
+
 
   return (
   <div className="AddWrapper">
     <MessageBox message={message} messageType={messageType}/>
     <h2 className="mb-5">Dodaj wdrozenie</h2>
     <div className="wrapping row">
+      <div class="form-group col-md-12">
+        <label for="exampleFormControlSelect1">Typ wdrożenia</label>
+        <select class="form-control" id="exampleFormControlSelect1" onChange={(e) => changeProjectType(e.target.value)}>
+          <option value='review'>Code review</option>
+          <option value='transformation'>Transformacja</option>
+        </select>
+      </div>
       <div className="input-group flex-nowrap mb-4 col-md-12">
         <div className="input-group-prepend">
           <span className="input-group-text" id="addon-wrapping">Nazwa</span>
@@ -98,19 +120,19 @@ const Add = () => {
         <div className="input-group-prepend">
           <span className="input-group-text" id="addon-wrapping">https://</span>
         </div>
-        <input type="text" className="form-control" placeholder="Link wdrożenia" aria-label="ProjectLink" aria-describedby="addon-wrapping" value={projectLink} onChange={(e) => setProjectLink(e.target.value)} />
+        <input type="text" className="form-control" placeholder="Link projektu" disabled={(projectType == 'review') ? true : false} aria-label="ProjectLink" aria-describedby="addon-wrapping" value={projectLink} onChange={(e) => setProjectLink(e.target.value)} />
       </div>
       <div className="input-group flex-nowrap mb-4 col-md-6">
         <div className="input-group-prepend">
           <span className="input-group-text" id="addon-wrapping">https://</span>
         </div>
-        <input type="text" className="form-control" placeholder="Link SBA" aria-label="SBALink" aria-describedby="addon-wrapping" value={sbaLink} onChange={(e) => setSbaLink(e.target.value)}/>
+        <input type="text" className="form-control" placeholder="Link SBA" disabled={(projectType == 'review') ? true : false} aria-label="SBALink" aria-describedby="addon-wrapping" value={sbaLink} onChange={(e) => setSbaLink(e.target.value)}/>
       </div>
       <div className="input-group flex-nowrap mb-4 col-md-6">
         <label className="d-inline-flex mr-4">Data zakończenia:</label>
         <DatePicker onChange={(data)=>{setDate(data)}} value={date}/>
       </div>
-      
+    
       <div className="buttons-wrapper col-md-12">
         <button type="submit" className="btn btn-primary mr-2" onClick={createProject}>Dodaj</button>
         <button type="button" className="btn btn-outline-danger" onClick={resetFields}>Reset</button>

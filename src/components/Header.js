@@ -12,7 +12,10 @@ const Header = () => (
             <Link className="nav-link" to="/add">Dodaj wdrożenie</Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/list">Lista wdrożeń</Link>
+            <Link className="nav-link" to="/list">Lista transformacji</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/review">Code Review</Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/temp">Training</Link>

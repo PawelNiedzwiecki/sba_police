@@ -7,6 +7,8 @@ import {
   Link,
 } from 'react-router-dom';
 import ListaWdrozen from './components/ListaWdrozen';
+import ReviewList from './components/Review/ReviewList';
+import ReviewItem from './components/Review/ReviewItem';
 import Wdrozenie from './components/Wdrozenie';
 import Home from './components/Home';
 import Header from './components/Header';
@@ -26,6 +28,10 @@ const App = () => (
           <Route exact path="/list">
             <ListaWdrozen />
           </Route>
+          <Route exact path="/review">
+            <ReviewList />
+          </Route>
+          <Route path="/review/:wdrozenieID" component={ReviewItem}/>
           <Route exact path="/add">
             <Add />
           </Route>
